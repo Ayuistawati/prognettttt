@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Upload Tugas</title>
+    <!-- Tambahkan referensi ke PDF.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.11.518/pdf.js"></script>
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="index.html">Beranda</a></li>
+            <li><a href="biodataform.html">Tugas Javascript</a></li>
+            <li><a href="tugas.html">Input Tugas</a></li>
+        </ul>
+    </nav>
+    <h1>Upload Tugas</h1>
+
+    <!-- Input untuk mengunggah file PDF -->
+    <input type="file" id="fileInput" accept=".pdf">
+    <button onclick="handleFile()">Upload</button>
+
+    <!-- Kontainer untuk menampilkan PDF -->
+    <div id="pdfContainer"></div>
+
+    <script>
+        // Fungsi untuk menampilkan PDF
+        function displayPDF(pdfData) {
+            const pdfContainer = document.getElementById("pdfContainer");
+
+            // Menentukan resolusi halaman PDF
+            const scale = 1.5;
+
+            // Membaca PDF menggunakan PDF.js
+            pdfjsLib.getDocument({ data: pdfData }).promise.then(function(pdf) {
+                // Mengambil halaman pertama
+                return pdf.getPage(1);
+            }).then(function(page) {
+                const viewport = page.getViewport({ scale });
+
+                // Membuat elemen canvas untuk menampilkan halaman PDF
+                const canvas = document.createElement("canvas");
+                const context = canvas.getContext("2d");
+                canvas.width = viewport.width;
+                canvas.height = viewport.height;
+                pdfContainer.innerHTML = ''; // Hapus konten sebelumnya
+                pdfContainer.appendChild(canvas);
+
+                // Menggambar halaman PDF ke elemen canvas
+                page.render({ canvasContext: context, viewport });
+            });
+        }
+
+        // Fungsi untuk menangani file yang diunggah
+        function handleFile() {
+            const fileInput = document.getElementById("fileInput");
+            const file = fileInput.files[0];
+            if (file && file.type === "application/pdf") {
+                const reader = new FileReader();
+
+                reader.onload = function(event) {
+                    // Menampilkan PDF setelah diunggah
+                    displayPDF(event.target.result);
+                };
+
+                reader.readAsArrayBuffer(file);
+            } else {
+                alert("Pilih file PDF yang valid.");
+            }
+        }
+    </script>
+</body>
+</html>

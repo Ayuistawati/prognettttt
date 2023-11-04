@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Biodata</title>
+    <link href="assets/style/style2.css" rel="stylesheet" />
+</head>
+<body>
+    <nav>
+        <ul class="menu">
+            <li><a href="index.php">Beranda</a></li>
+            <li><a href="biodata.html">Tugas Javascript</a></li>
+            <li><a href="tugas.html">Input Tugas</a></li>
+        </ul>
+    </nav>
+    <h1>Form Biodata</h1>
+    <form action="simpan.php" method="post">
+        <label>NIM:</label>
+        <input type="text" name="nim" required><br>
+
+        <label>Nama:</label>
+        <input type="text" name="nama" required><br>
+
+        <label>Alamat Gmail:</label>
+        <input type="text" name="alamat_gmail" required><br>
+
+        <label>Alamat Rumah:</label>
+        <input type="text" name="alamat_rumah" required><br>
+
+        <label>No. Telepon:</label>
+        <input type="text" name="no_tlp" required><br>
+
+        <label>Prodi:</label>
+        <select name="prodi" required>
+            <option value="tinformasi">Teknologi Informasi</option>
+            <option value="industri">Teknik Industri</option>
+            <option value="sipil">Teknik Sipil</option>
+            <option value="lingkungan">Teknik Lingkungan</option>
+            <option value="arsitek">teknik Arsitektur</option>
+            <option value="mesin">Teknik Mesin</option>
+            <option value="Lelektri">Teknik Elektro</option>
+        </select><br>
+
+        <label>Jenis Kelamin:</label>
+        <select name="jenis_kelamin" required>
+            <option value="Laki-laki">L</option>
+            <option value="Perempuan">P</option>
+        </select><br>
+
+        <input type="submit" value="Simpan">
+    </form>
+    <a href="index.php">klik</a>
+</body>
+</html>
